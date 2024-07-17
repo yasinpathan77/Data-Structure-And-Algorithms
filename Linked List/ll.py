@@ -20,16 +20,19 @@ class LinkedList:
 
     def print(self) -> None:
         current_node = self.head
+
         while current_node:
             print(current_node.Value)
             current_node = current_node.next
 
     def append(self, value) -> None:
         newNode = Node(value)
+
         if self.length == 0:
             self.head = newNode
         else:
             self.tail.next = newNode
+
         self.tail = newNode
         self.length += 1
 
@@ -41,42 +44,59 @@ class LinkedList:
     def pop(self):
         if self.length == 0:
             return None
+
         current_node = self.head
+
         while current_node.next:
             previous_node = current_node
             current_node = current_node.next
+
         self.length -= 1
+
         if self.length == 0:
             self.head, self.tail = None, None
         self.tail = previous_node
+
         previous_node.next = None
 
     def prepend(self, value):
         newNode = Node(value)
         self.length += 1
+
         if self.length == 1:
             self.tail = newNode
         else:
             newNode.next = self.head
+
         self.head = newNode
 
     def pop_first(self):
         if self.length == 0:
             return None
+
         self.head = self.head.next
+
         if self.length == 1:
             self.tail = None
+
         self.length -= 1
 
     def set_value(self, index, value):
-        if index+1 > self.length:
+        target_node = self.get(index)
+
+        if target_node:
+            target_node.Value = value
+
+    def get(self, index):
+        if index+1 > self.length or index < 0:
             return None
 
         current_node = self.head
         for i in range(index):
             current_node = current_node.next
 
-        current_node.Value = value
+        return current_node
+
 
 ll = LinkedList(4)
 
@@ -85,6 +105,7 @@ ll.pop()
 ll.prepend(9)
 ll.pop_first()
 ll.set_value(0, 1)
+
 
 ll.print()
 
