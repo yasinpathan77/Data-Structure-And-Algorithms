@@ -51,10 +51,41 @@ class LinkedList:
         self.tail = previous_node
         previous_node.next = None
 
+    def prepend(self, value):
+        newNode = Node(value)
+        self.length += 1
+        if self.length == 1:
+            self.tail = newNode
+        else:
+            newNode.next = self.head
+        self.head = newNode
+
+    def pop_first(self):
+        if self.length == 0:
+            return None
+        self.head = self.head.next
+        if self.length == 1:
+            self.tail = None
+        self.length -= 1
+
+    def set_value(self, index, value):
+        if index+1 > self.length:
+            return None
+
+        current_node = self.head
+        for i in range(index):
+            current_node = current_node.next
+
+        current_node.Value = value
+
 ll = LinkedList(4)
 
 ll.append(7)
 ll.pop()
+ll.prepend(9)
+ll.pop_first()
+ll.set_value(0, 1)
+
 ll.print()
 
 print('Head', ll.head.Value)
