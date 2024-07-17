@@ -88,7 +88,7 @@ class LinkedList:
             target_node.Value = value
 
     def get(self, index):
-        if index+1 > self.length or index < 0:
+        if self.check_index_value(index):
             return None
 
         current_node = self.head
@@ -96,6 +96,51 @@ class LinkedList:
             current_node = current_node.next
 
         return current_node
+
+    def check_index_value(self, index):
+        return index+1 > self.length or index < 0
+
+    def insert(self, index, value):
+        if self.check_index_value(index):
+            return None
+
+        if index == 0:
+            self.prepend(value)
+            return
+
+        if index == self.length:
+            self.append(value)
+            return
+
+        newNode = Node(value)
+        previous_node = self.get(index-1)
+
+        newNode.next = previous_node.next
+        previous_node.next = newNode
+        self.length += 1
+
+    def remove(self, value):
+        current_node = self.head
+        previous_node = self.head
+        self.length -= 1
+
+        if self.length == 0:
+            self.head, self.tail = None, None
+            return
+
+        if self.head.Value == value:
+            self.head = self.head.next
+            return
+
+        while current_node.next and current_node.Value != value:
+            previous_node = current_node
+            current_node = current_node.next
+
+        previous_node.next = current_node.next
+        current_node.next = None
+
+
+
 
 
 ll = LinkedList(4)
@@ -105,7 +150,9 @@ ll.pop()
 ll.prepend(9)
 ll.pop_first()
 ll.set_value(0, 1)
-
+ll.append(6)
+ll.insert(1, 2)
+ll.remove(2)
 
 ll.print()
 
