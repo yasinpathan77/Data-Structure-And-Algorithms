@@ -19,10 +19,10 @@ class LinkedList:
         self.length = 1
 
     def print(self) -> None:
-        pointer = self.head
-        while pointer:
-            print(pointer.Value)
-            pointer = pointer.next
+        current_node = self.head
+        while current_node:
+            print(current_node.Value)
+            current_node = current_node.next
 
     def append(self, value) -> None:
         newNode = Node(value)
@@ -33,13 +33,28 @@ class LinkedList:
         self.tail = newNode
         self.length += 1
 
+    def empty(self):
+        self.tail = None
+        self.head = None
+        self.length = 0
 
-
+    def pop(self):
+        if self.length == 0:
+            return None
+        current_node = self.head
+        while current_node.next:
+            previous_node = current_node
+            current_node = current_node.next
+        self.length -= 1
+        if self.length == 0:
+            self.head, self.tail = None, None
+        self.tail = previous_node
+        previous_node.next = None
 
 ll = LinkedList(4)
 
 ll.append(7)
-
+ll.pop()
 ll.print()
 
 print('Head', ll.head.Value)
