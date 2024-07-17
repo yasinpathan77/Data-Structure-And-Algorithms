@@ -139,7 +139,17 @@ class LinkedList:
         previous_node.next = current_node.next
         current_node.next = None
 
-
+    def reverse(self):
+        current_node = self.head
+        self.tail = self.head
+        previous_node = None
+        while current_node.next:
+            next_node = current_node.next
+            current_node.next = previous_node
+            previous_node = current_node
+            current_node = next_node
+        current_node.next = previous_node
+        self.head = current_node
 
 
 
@@ -152,7 +162,8 @@ ll.pop_first()
 ll.set_value(0, 1)
 ll.append(6)
 ll.insert(1, 2)
-ll.remove(2)
+# ll.remove(2)
+ll.reverse()
 
 ll.print()
 
