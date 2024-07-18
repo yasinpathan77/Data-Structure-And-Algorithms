@@ -234,7 +234,12 @@ class LinkedList:
             fast = fast.next.next
         return slow
 
-    def has_loop(self):
+    def has_loop(self) -> bool:
+        """Checks whether the list contains loop or not
+
+        Returns:
+            bool: True if it contains
+        """
         slow = self.head
         fast = self.head
         while slow and fast:
@@ -243,6 +248,18 @@ class LinkedList:
             slow = slow.next
             fast = fast.next.next
         return False
+
+    def remove_duplicate(self) -> None:
+        """ Removes duplicate value from linked list.
+        """
+        current_node = self.head
+        values = set()
+        while current_node:
+            previous_node = current_node
+            if current_node.Value in values:
+                previous_node.next = current_node.next
+            values.add(current_node.Value)
+            current_node = current_node.next
 
 ll = LinkedList(4)
 
@@ -255,7 +272,8 @@ ll.append(6)
 ll.insert(1, 2)
 # ll.remove(2)
 ll.reverse()
-
+ll.append(2)
+ll.remove_duplicate()
 ll.print()
 
 print('Head', ll.head.Value)
