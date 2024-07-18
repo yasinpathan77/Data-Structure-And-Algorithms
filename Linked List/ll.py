@@ -220,6 +220,20 @@ class LinkedList:
         current_node.next = previous_node
         self.head = current_node
 
+    def middle_node(self) -> Node:
+        """
+        Returns the middle node
+
+        Returns:
+            _type_: Node
+        """
+        slow = self.head
+        fast = self.head
+        while slow and fast:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
+
 
 ll = LinkedList(4)
 
