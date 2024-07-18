@@ -261,6 +261,28 @@ class LinkedList:
             values.add(current_node.Value)
             current_node = current_node.next
 
+    def find_kth_from_the_end(self, k) -> Node:
+        """find the kth node from the end
+
+        Args:
+            k (int): position from ending
+
+        Returns:
+            Node: Linked List Node
+        """
+        kth_node = self.head
+        forward_node = self.head
+        for i in range(k):
+            if not forward_node.next:
+                return None
+            forward_node = forward_node.next
+
+        while forward_node:
+            forward_node = forward_node.next
+            kth_node = kth_node.next
+
+        return kth_node
+
 ll = LinkedList(4)
 
 ll.append(7)
