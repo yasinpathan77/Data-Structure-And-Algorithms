@@ -234,6 +234,15 @@ class LinkedList:
             fast = fast.next.next
         return slow
 
+    def has_loop(self):
+        slow = self.head
+        fast = self.head
+        while slow and fast:
+            if slow == fast:
+                return True
+            slow = slow.next
+            fast = fast.next.next
+        return False
 
 ll = LinkedList(4)
 
