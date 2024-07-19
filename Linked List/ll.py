@@ -305,6 +305,30 @@ class LinkedList:
         current_node.next = temp
         first_node.next = current_node
 
+    def partition_list(self, x):
+        if not self.head:
+            return None
+
+        current_node = self.head
+
+        smaller_node = Node(0)
+        greater_node = Node(0)
+
+        smaller_start = smaller_node
+        greater_start = greater_node
+
+        while current_node:
+            if current_node.Value < x:
+                smaller_node.next = current_node
+                smaller_node = current_node
+            else:
+                greater_node.next = current_node
+                greater_node = current_node
+            current_node = current_node.next
+
+        greater_node.next = None
+        smaller_node.next = greater_start.next
+        self.head = smaller_start.next
 
 ll = LinkedList(1)
 
@@ -326,6 +350,8 @@ ll.append(5)
 # ll.append(2)
 # ll.remove_duplicate()
 ll.reverse_between(1, 3)
+ll.partition_list(3)
+
 
 ll.print()
 
