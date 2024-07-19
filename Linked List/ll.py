@@ -283,20 +283,52 @@ class LinkedList:
 
         return kth_node
 
-ll = LinkedList(4)
+    def reverse_between(self, start, end):
+        if not self.head:
+            return None
 
-ll.append(7)
-ll.pop()
-ll.prepend(9)
-ll.pop_first()
-ll.set_value(0, 1)
-ll.append(6)
-ll.insert(1, 2)
-# ll.remove(2)
-ll.reverse()
+        first_node = self.head
+
+        for i in range(start-1):
+            first_node = first_node.next
+
+        current_node = first_node.next
+        start_node = current_node
+        for i in range(start, end-1):
+            next_node = current_node.next
+            temp = next_node.next
+            next_node.next = current_node
+            current_node = temp
+
+        temp = start_node.next
+        start_node.next = current_node.next
+        current_node.next = temp
+        first_node.next = current_node
+
+
+ll = LinkedList(1)
+
 ll.append(2)
-ll.remove_duplicate()
+ll.append(3)
+ll.append(4)
+ll.append(5)
+
+
+# ll.append(7)
+# ll.pop()
+# ll.prepend(9)
+# ll.pop_first()
+# ll.set_value(0, 1)
+# ll.append(6)
+# ll.insert(1, 2)
+# # ll.remove(2)
+# ll.reverse()
+# ll.append(2)
+# ll.remove_duplicate()
+ll.reverse_between(1, 3)
+
 ll.print()
+
 
 print('Head', ll.head.Value)
 print('Tail', ll.tail.Value)
